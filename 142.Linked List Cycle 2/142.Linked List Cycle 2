@@ -1,0 +1,20 @@
+## 第一段階
+#### ハッシュテーブルの解法
+```python
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        
+        seen = set()
+        node = head
+
+        while node is not None:
+            if node in seen:
+                return node
+            
+            seen.add(node)
+            node = node.next
+        
+        return None
+```
