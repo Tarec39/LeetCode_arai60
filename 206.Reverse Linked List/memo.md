@@ -1,0 +1,4 @@
+- [Manatoさん](https://github.com/Manato110/LeetCode-arai60/blob/206.-Reverse-Linked-List/206.%20Reverse%20Linked%20List/206.%20Reverse%20Linked%20List.md)
+  - スタックを使わずに解ける
+  - 一度コードを読んでみたけど、再現できる気がしない。コードからイメージを紙の上に起こす必要がある。これを脳内で完結させれる日はくるのだろうか？
+  - やっぱり再帰もある。
