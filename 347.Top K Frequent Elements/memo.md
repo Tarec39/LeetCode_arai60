@@ -34,3 +34,59 @@
 
 - 大いなる寄り道
   - ハッシュセットとハッシュマップを実装してみるか...ハッシュ関数部分は同じなんだから、そんな合わせてもすごい分量にはならないだろうきっと。
+---
+## 2.バケットソート＋ハッシュマップ
+- お？なんか簡単だ。怖くないじゃないか。
+```python3
+# 0〜9までのバケツを用意
+buckets = [[] for _ in range(10)]
+
+# 数字を対応するバケツに入れる
+for n in numbers:
+    buckets[n].append(n)
+```
+- この問題もハッシュマップ使うなら、解法1ソート＋ハッシュマップの兄弟じゃん。ここの題名に「ハッシュマップ」と追記しておこう。
+```pyhton3
+from collections import Counter
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = Counter(nums)
+
+        buckets = [[] for _ in range(len(nums) + 1)]
+
+        for num, freq in count.items():
+            buckets[freq].append(num)
+
+        result = []
+
+        for freq in range(len(nums), 0, -1):
+            for num in buckets[freq]:
+                result.append(num)
+
+                if len(result) == k:
+                    return result
+```
+## 3.ヒープ
+- なんで最小ヒープ？最頻値を求められるの？
+  - ChatGPT曰く、「出現回数が最も少ない数字を簡単に捨てられるからです」
+
+- ここでもハッシュマップか...
+```pyhon3
+from collections import Counter
+import heapq
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = Counter(nums)
+        heap = []
+
+        for num, freq in count.items():
+            heapq.heappush(heap, (freq, num))
+
+            if len(heap) > k:
+                heapq.heappop(heap)
+
+        return [num for freq, num in heap]
+```
+## 寄り道：ハッシュセットとハッシュテーブルを実装してみよう。
